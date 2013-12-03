@@ -17,7 +17,7 @@ class CreateExercisesTable extends Migration {
 			$table->string('name');
 			$table->text('description');
 			$table->integer('level');
-			$table->enum('master');
+			$table->enum('master', ['pushup','pullup','squat','legLift','handstandPushup','bridge']);
 			$table->boolean('isMaster');
 			$table->timestamps();
 		});
