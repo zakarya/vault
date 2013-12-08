@@ -21,9 +21,9 @@ class ExercisesController extends BaseController {
 	 */
 	public function index()
 	{
-		$exercises = $this->exercise->all();
+		$exercise = $this->exercise->all();
 
-		return View::make('exercises.index', compact('exercises'));
+		return $exercise->toJson();
 	}
 
 	/**
@@ -33,7 +33,7 @@ class ExercisesController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('exercises.create');
+		return View::make('exercise.create');
 	}
 
 	/**
@@ -50,10 +50,10 @@ class ExercisesController extends BaseController {
 		{
 			$this->exercise->create($input);
 
-			return Redirect::route('exercises.index');
+			return Redirect::route('exercise.index');
 		}
 
-		return Redirect::route('exercises.create')
+		return Redirect::route('exercise.create')
 			->withInput()
 			->withErrors($validation)
 			->with('message', 'There were validation errors.');
@@ -69,7 +69,7 @@ class ExercisesController extends BaseController {
 	{
 		$exercise = $this->exercise->findOrFail($id);
 
-		return View::make('exercises.show', compact('exercise'));
+		return View::make('exercise.show', compact('exercise'));
 	}
 
 	/**
@@ -84,10 +84,10 @@ class ExercisesController extends BaseController {
 
 		if (is_null($exercise))
 		{
-			return Redirect::route('exercises.index');
+			return Redirect::route('exercise.index');
 		}
 
-		return View::make('exercises.edit', compact('exercise'));
+		return View::make('exercise.edit', compact('exercise'));
 	}
 
 	/**
@@ -106,10 +106,10 @@ class ExercisesController extends BaseController {
 			$exercise = $this->exercise->find($id);
 			$exercise->update($input);
 
-			return Redirect::route('exercises.show', $id);
+			return Redirect::route('exercise.show', $id);
 		}
 
-		return Redirect::route('exercises.edit', $id)
+		return Redirect::route('exercise.edit', $id)
 			->withInput()
 			->withErrors($validation)
 			->with('message', 'There were validation errors.');
@@ -125,7 +125,7 @@ class ExercisesController extends BaseController {
 	{
 		$this->exercise->find($id)->delete();
 
-		return Redirect::route('exercises.index');
+		return Redirect::route('exercise.index');
 	}
 
 }
