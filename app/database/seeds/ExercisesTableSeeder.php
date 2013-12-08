@@ -5,8 +5,7 @@ class ExercisesTableSeeder extends Seeder {
 	public function run()
 	{
 		// Uncomment the below to wipe the table clean before populating
-		DB::table('exercises')->truncate
-	();
+		DB::table('exercises')->truncate();
 
 	$exercises= [
 		[
