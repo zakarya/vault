@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateExercisesTable extends Migration {
+class CreateSetsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,13 @@ class CreateExercisesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('exercises', function(Blueprint $table) {
+		Schema::create('sets', function(Blueprint $table) {
 			$table->increments('id')->unsigned();
-			$table->string('name');
-			$table->text('description');
-			$table->integer('level');
+			$table->integer('workout_id')->unsigned();
+			$table->integer('reps');
+			$table->integer('goal');
+			$table->integer('actual');
+			$table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}
@@ -29,7 +31,7 @@ class CreateExercisesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('exercises');
+		Schema::drop('sets');
 	}
 
 }

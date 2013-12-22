@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateExercisesTable extends Migration {
+class AddNameToBaseExercisesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,15 +12,10 @@ class CreateExercisesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('exercises', function(Blueprint $table) {
-			$table->increments('id')->unsigned();
+		Schema::table('base_exercises', function(Blueprint $table) {
 			$table->string('name');
-			$table->text('description');
-			$table->integer('level');
-			$table->timestamps();
 		});
 	}
-
 
 	/**
 	 * Reverse the migrations.
@@ -29,7 +24,9 @@ class CreateExercisesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('exercises');
+		Schema::table('base_exercises', function(Blueprint $table) {
+			$table->dropColumn('name');
+		});
 	}
 
 }
