@@ -14,10 +14,10 @@ class PivotExerciseWorkoutTable extends Migration {
 	{
 		Schema::create('exercise_workout', function(Blueprint $table) {
 			$table->increments('id')->unsigned();
-			$table->integer('exercise_id')->unsigned()->index();
-			$table->integer('workout_id')->unsigned()->index();
-			$table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
-			$table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
+			$table->integer('exercise_id')->unsigned();
+			$table->integer('workout_id')->unsigned();
+			// $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
+			// $table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

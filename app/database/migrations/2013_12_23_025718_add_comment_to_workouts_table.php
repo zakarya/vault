@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class AddNameToBaseExercisesTable extends Migration {
+class AddCommentToWorkoutsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class AddNameToBaseExercisesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('base_exercises', function(Blueprint $table) {
-			$table->string('name')->after('exercise_id');
+		Schema::table('workouts', function(Blueprint $table) {
+			$table->text('comment')->after('id')->nullable();
 		});
 	}
 
@@ -24,8 +24,8 @@ class AddNameToBaseExercisesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('base_exercises', function(Blueprint $table) {
-			$table->dropColumn('name');
+		Schema::table('workouts', function(Blueprint $table) {
+			$table->dropColumn('comment');
 		});
 	}
 

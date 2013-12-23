@@ -19,7 +19,7 @@ class CreateGoalsTable extends Migration {
 			$table->integer('sets');
 			$table->timestamp('accomplish_at');
 			$table->timestamps();
-			$table->foreign('exercise_id')->references('id')->on('exercises');
+			// $table->foreign('exercise_id')->references('id')->on('exercises');
 		});
 	}
 

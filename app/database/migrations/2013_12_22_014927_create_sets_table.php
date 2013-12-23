@@ -18,7 +18,7 @@ class CreateSetsTable extends Migration {
 			$table->integer('reps');
 			$table->integer('goal');
 			$table->integer('actual');
-			$table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
+			// $table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

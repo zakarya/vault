@@ -13,9 +13,9 @@ class AddProgressionsToExercisesTable extends Migration {
 	public function up()
 	{
 		Schema::table('exercises', function(Blueprint $table) {
-			$table->string('beginner')->after('level');
-			$table->string('intermediate')->after('level');
 			$table->string('progression')->after('level');
+			$table->string('intermediate')->after('level');
+			$table->string('beginner')->after('level');
 		});
 	}
 
