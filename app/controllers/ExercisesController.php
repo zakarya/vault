@@ -1,6 +1,6 @@
 <?php
 
-class ExercisesController extends BaseController {
+class ExerciseController extends BaseController {
 
 	/**
 	 * Exercise Repository
@@ -21,19 +21,9 @@ class ExercisesController extends BaseController {
 	 */
 	public function index()
 	{
-		$exercise = $this->exercise->all();
+		$exercises = $this->exercise->all();
 
-		return $exercise->toJson();
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return View::make('exercise.create');
+		return Response::make($exercises->toJson(), 200);
 	}
 
 	/**
@@ -44,19 +34,16 @@ class ExercisesController extends BaseController {
 	public function store()
 	{
 		$input = Input::all();
-		$validation = Validator::make($input, Exercise::$rules);
+		$validator = Validator::make($input, Exercise::$rules);
 
-		if ($validation->passes())
+		if ($validator->passes())
 		{
-			$this->exercise->create($input);
+			$exercise = $this->exercise->create($input);
 
-			return Redirect::route('exercise.index');
+			return Response::make($exercise->toJson(), 201);
 		}
 
-		return Redirect::route('exercise.create')
-			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+		return Response::make($validator->messages(), 400);
 	}
 
 	/**
@@ -68,26 +55,7 @@ class ExercisesController extends BaseController {
 	public function show($id)
 	{
 		$exercise = $this->exercise->findOrFail($id);
-
-		return View::make('exercise.show', compact('exercise'));
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		$exercise = $this->exercise->find($id);
-
-		if (is_null($exercise))
-		{
-			return Redirect::route('exercise.index');
-		}
-
-		return View::make('exercise.edit', compact('exercise'));
+		return Response::make($exercise->toJson(), 200);
 	}
 
 	/**
@@ -99,20 +67,17 @@ class ExercisesController extends BaseController {
 	public function update($id)
 	{
 		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, Exercise::$rules);
+		$validator = Validator::make($input, Exercise::$rules);
 
-		if ($validation->passes())
+		if ($validator->passes())
 		{
 			$exercise = $this->exercise->find($id);
 			$exercise->update($input);
 
-			return Redirect::route('exercise.show', $id);
+			return Response::make($exercise->toJson(), 200);
 		}
 
-		return Redirect::route('exercise.edit', $id)
-			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+		return Response::make($validator->messages(), 400);
 	}
 
 	/**
@@ -125,7 +90,7 @@ class ExercisesController extends BaseController {
 	{
 		$this->exercise->find($id)->delete();
 
-		return Redirect::route('exercise.index');
+		return Response::make('', 204);
 	}
 
 }

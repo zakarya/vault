@@ -16,4 +16,5 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::resource('exercise', 'ExercisesController');
+Route::resource('exercise', 'ExerciseController');
+Route::resource('workout', 'WorkoutController');

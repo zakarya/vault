@@ -7,7 +7,5 @@ class Exercise extends Eloquent {
 		'name' => 'required',
 		'description' => 'required',
 		'level' => 'required',
-		'master' => 'required',
-		'isMaster' => 'required'
 	);
 }
