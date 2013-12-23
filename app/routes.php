@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return Response::make('This is the index', 200);
 });
 
 Route::resource('exercise', 'ExerciseController');
