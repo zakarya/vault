@@ -43,8 +43,7 @@ class WorkoutController extends BaseController {
 	public function show($id)
 	{
 		$workout = Workout::find($id)
-			->with('exercises')
-			->with('sets')->get();
+			->with('exercises')->get();
 
 		return Response::make($workout->toJson(), 200);
 	}

@@ -6,7 +6,7 @@ class Workout extends Eloquent {
 	public static $rules = array();
 
 	public function exercises() {
-		return $this->belongsToMany('Exercise');
+		return $this->belongsToMany('Exercise')->withPivot('set', 'reps', 'goal');
 	}
 
 	public function sets() {
