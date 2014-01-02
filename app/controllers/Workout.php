@@ -27,11 +27,12 @@ class WorkoutController extends BaseController {
 		if($validator->passes()) {
 			$workout = new Workout;
 			$workout->fill($input);
-			return print_r($workout->sets()->toJson());
 			$workout->save();
 
 			return Response::make($workout->toJson(), 200);
 		}
+
+		return Response::make($validator->messages(), 400);
 	}
 
 	/**
@@ -42,8 +43,7 @@ class WorkoutController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$workout = Workout::find($id)
-			->with('exercises')->get();
+		$workout = Workout::find($id);
 
 		return Response::make($workout->toJson(), 200);
 	}
@@ -56,7 +56,18 @@ class WorkoutController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = array_except(Input::all(), '_method');
+		$validator = Validator::make($input, Workout::$rules);
+
+		if ($validator->passes())
+		{
+			$workout = Workout::find($id);
+			$workout->update($input);
+
+			return Response::make($workout->toJson(), 200);
+		}
+
+		return Response::make($validator->messages(), 400);
 	}
 
 	/**
@@ -67,7 +78,9 @@ class WorkoutController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		Workout::find($id)->delete();
+
+		return Response::make('', 204);
 	}
 
 }

@@ -16,5 +16,13 @@ Route::get('/', function()
 	return Response::make('This is the index', 200);
 });
 
+Route::options('/workout', function () {
+	return Response::make('options', 200);
+});
+
+Route::options('/exercise', function () {
+	return Response::make('options', 200);
+});
+
 Route::resource('exercise', 'ExerciseController');
 Route::resource('workout', 'WorkoutController');
