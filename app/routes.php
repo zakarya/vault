@@ -24,5 +24,10 @@ Route::options('/exercise', function () {
 	return Response::make('options', 200);
 });
 
+Route::options('/goal', function () {
+	return Response::make('options', 200);
+});
+
 Route::resource('exercise', 'ExerciseController');
 Route::resource('workout', 'WorkoutController');
+Route::resource('goal', 'GoalController');
