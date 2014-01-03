@@ -11,6 +11,10 @@
 |
 */
 
+Route::filter('auth.basic', function () {
+	return Auth::basic("username");
+});
+
 Route::get('/', function()
 {
 	return Response::make('This is the index', 200);
@@ -28,6 +32,8 @@ Route::options('/goal', function () {
 	return Response::make('options', 200);
 });
 
-Route::resource('exercise', 'ExerciseController');
-Route::resource('workout', 'WorkoutController');
-Route::resource('goal', 'GoalController');
+Route::group(array('before' => 'auth.basic'), function () {
+	Route::resource('exercise', 'ExerciseController');
+	Route::resource('workout', 'WorkoutController');
+	Route::resource('goal', 'GoalController');
+});
