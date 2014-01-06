@@ -9,7 +9,7 @@ class GoalController extends BaseController {
 	 */
 	public function index()
 	{
-		$goals = Goal::all();
+		$goals = Goal::with('exercise')->get();
 
 		return Response::make($goals->toJson(), 200);
 	}
