@@ -11,10 +11,6 @@
 |
 */
 
-Route::filter('auth.basic', function () {
-	return Auth::basic("username");
-});
-
 Route::get('/', function()
 {
 	return Response::make('This is the index', 200);
