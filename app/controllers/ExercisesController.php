@@ -23,7 +23,7 @@ class ExerciseController extends BaseController {
 	{
 		$exercises = $this->exercise->all();
 
-		return Response::make($exercises->toJson(), 200);
+		return Response::json($exercises, 200);
 	}
 
 	/**
@@ -40,10 +40,10 @@ class ExerciseController extends BaseController {
 		{
 			$exercise = $this->exercise->create($input);
 
-			return Response::make($exercise->toJson(), 201);
+			return Response::json($exercise, 201);
 		}
 
-		return Response::make($validator->messages(), 400);
+		return Response::json($validator->messages(), 400);
 	}
 
 	/**
@@ -55,7 +55,7 @@ class ExerciseController extends BaseController {
 	public function show($id)
 	{
 		$exercise = $this->exercise->findOrFail($id);
-		return Response::make($exercise->toJson(), 200);
+		return Response::json($exercise, 200);
 	}
 
 	/**
@@ -74,10 +74,10 @@ class ExerciseController extends BaseController {
 			$exercise = $this->exercise->find($id);
 			$exercise->update($input);
 
-			return Response::make($exercise->toJson(), 200);
+			return Response::json($exercise, 200);
 		}
 
-		return Response::make($validator->messages(), 400);
+		return Response::json($validator->messages(), 400);
 	}
 
 	/**
@@ -90,7 +90,7 @@ class ExerciseController extends BaseController {
 	{
 		$this->exercise->find($id)->delete();
 
-		return Response::make('', 204);
+		return Response::json(null, 204);
 	}
 
 }
