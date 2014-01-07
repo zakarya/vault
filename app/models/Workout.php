@@ -3,7 +3,9 @@
 class Workout extends Eloquent {
 	protected $guarded = array();
 
-	public static $rules = array();
+	public static $rules = array(
+			'comment' => 'required'
+		);
 
 	public function exercises() {
 		return $this->belongsToMany('Exercise')->withPivot('set', 'reps', 'goal');

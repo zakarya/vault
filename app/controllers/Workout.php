@@ -11,7 +11,7 @@ class WorkoutController extends BaseController {
 	{
 		$workouts = Workout::all();
 
-		return Response::make($workouts->toJson(), 200);
+		return Response::json($workouts, 200);
 	}
 
 	/**
@@ -29,10 +29,10 @@ class WorkoutController extends BaseController {
 			$workout->fill($input);
 			$workout->save();
 
-			return Response::make($workout->toJson(), 200);
+			return Response::json($workout, 200);
 		}
 
-		return Response::make($validator->messages(), 400);
+		return Response::json($validator->messages(), 400);
 	}
 
 	/**
@@ -45,7 +45,7 @@ class WorkoutController extends BaseController {
 	{
 		$workout = Workout::find($id);
 
-		return Response::make($workout->toJson(), 200);
+		return Response::json($workout, 200);
 	}
 
 	/**
@@ -64,10 +64,10 @@ class WorkoutController extends BaseController {
 			$workout = Workout::find($id);
 			$workout->update($input);
 
-			return Response::make($workout->toJson(), 200);
+			return Response::json($workout, 200);
 		}
 
-		return Response::make($validator->messages(), 400);
+		return Response::json($validator->messages(), 400);
 	}
 
 	/**
@@ -78,9 +78,13 @@ class WorkoutController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		Workout::find($id)->delete();
+		$workout = Workout::find($id);
 
-		return Response::make('', 204);
+		if ($workout) {
+			$workout->delete();
+		}
+
+		return Response::json(null, 204);
 	}
 
 }

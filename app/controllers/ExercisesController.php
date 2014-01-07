@@ -88,7 +88,11 @@ class ExerciseController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->exercise->find($id)->delete();
+		$exercise = $this->exercise->find($id);
+
+		if ($exercise) {
+			$exercise->delete();
+		}
 
 		return Response::json(null, 204);
 	}
