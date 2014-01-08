@@ -28,6 +28,12 @@ Route::options('/goal', function () {
 	return Response::make('options', 200);
 });
 
+Route::options('/authentication', function () {
+	return Response::make('authentication', 200);
+});
+
+Route::resource('authentication', 'AuthenticationController');
+
 Route::group(array('before' => 'auth.basic'), function () {
 	Route::resource('exercise', 'ExerciseController');
 	Route::resource('workout', 'WorkoutController');

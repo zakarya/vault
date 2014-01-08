@@ -20,13 +20,14 @@ class AuthenticationController extends BaseController {
 	 */
 	public function store()
 	{
-		$credentials = array(
-				'email' => Input::get('email'),
-				'password' => Input::get('password')
-			);
+		if (Auth::basic()) {
+			return Response::make('awesome', 200);
+		} else {
+			return Response::make('bad', 401);
+		}
 
 		if (Auth::attempt($credentials)) {
-			return csrf_token();
+			return Response::json(Auth::user(), 200);
 		} else {
 			return Response::json('Failed to login', 401);
 		}
