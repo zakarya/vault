@@ -7,13 +7,19 @@ class UsersTableSeeder extends Seeder {
 		// Uncomment the below to wipe the table clean before populating
 		DB::table('users')->truncate();
 
-		$user = array(
-			'email' => 'zack.vera@example.com',
-			'password' => Hash::make('password')
+		$users = array(
+			[
+				'email' => 'zack.vera@example.com',
+				'password' => Hash::make('password')
+			],
+			[
+				'email' => 'qphys50@gmail.com',
+				'password' => Hash::make('password')
+			]
 		);
 
 		// Uncomment the below to run the seeder
-		DB::table('users')->insert($user);
+		DB::table('users')->insert($users);
 	}
 
 }
