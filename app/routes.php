@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('auth', 'Tappleby\AuthToken\AuthTokenController@index');
+Route::post('auth', 'Tappleby\AuthToken\AuthTokenController@store');
+Route::delete('auth', 'Tappleby\AuthToken\AuthTokenController@destroy');
+
 Route::get('/', function()
 {
 	return Response::make('This is the index', 200);
@@ -34,7 +38,7 @@ Route::options('/authentication', function () {
 
 Route::resource('authentication', 'AuthenticationController');
 
-Route::group(array('before' => 'auth.basic'), function () {
+Route::group(array('before' => 'auth.token'), function () {
 	Route::resource('exercise', 'ExerciseController');
 	Route::resource('workout', 'WorkoutController');
 	Route::resource('goal', 'GoalController');
