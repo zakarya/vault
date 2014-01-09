@@ -50,7 +50,8 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+	return Response::json(array('error' => $exception->getMessage()), $code);
+	// Log::error($exception);
 });
 
 /*
@@ -81,3 +82,9 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+Event::listen('auth.token.valid', function($user)
+{
+	//Token is valid, set the user on auth system.
+	Auth::setUser($user);
+});
