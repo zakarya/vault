@@ -50,6 +50,9 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 
 App::error(function(Exception $exception, $code)
 {
+	if(get_class($exception) === 'Tappleby\AuthToken\Exceptions\NotAuthorizedException') {
+		return Response::json(array('error' => $exception->getMessage()), 401);
+	}
 	return Response::json(array('error' => $exception->getMessage()), $code);
 	// Log::error($exception);
 });

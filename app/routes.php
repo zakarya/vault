@@ -32,6 +32,14 @@ Route::options('/goal', function () {
 	return Response::make('options', 200);
 });
 
+Route::options('/auth', function () {
+	return Response::make('options', 200);
+});
+
+Route::options('/user', function () {
+	return Response::json(Auth::user(), 200);
+});
+
 Route::options('/authentication', function () {
 	return Response::make('authentication', 200);
 });
@@ -42,4 +50,5 @@ Route::group(array('before' => 'auth.token'), function () {
 	Route::resource('exercise', 'ExerciseController');
 	Route::resource('workout', 'WorkoutController');
 	Route::resource('goal', 'GoalController');
+	Route::resource('user', 'UserController');
 });
