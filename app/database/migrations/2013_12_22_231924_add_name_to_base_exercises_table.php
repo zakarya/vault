@@ -24,9 +24,9 @@ class AddNameToBaseExercisesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('base_exercises', function(Blueprint $table) {
-			$table->dropColumn('name');
-		});
+		// Schema::table('base_exercises', function(Blueprint $table) {
+		// 	$table->dropColumnIfExists('name');
+		// });
 	}
 
 }
