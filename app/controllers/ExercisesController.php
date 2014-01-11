@@ -9,11 +9,6 @@ class ExerciseController extends BaseController {
 	 */
 	protected $exercise;
 
-	public function __construct(Exercise $exercise)
-	{
-		$this->exercise = $exercise;
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -21,7 +16,7 @@ class ExerciseController extends BaseController {
 	 */
 	public function index()
 	{
-		$exercises = $this->exercise->all();
+		$exercises = Exercise::all();
 
 		return Response::json($exercises, 200);
 	}
@@ -38,7 +33,7 @@ class ExerciseController extends BaseController {
 
 		if ($validator->passes())
 		{
-			$exercise = $this->exercise->create($input);
+			$exercise = Exercise::create($input);
 
 			return Response::json($exercise, 201);
 		}
@@ -54,7 +49,7 @@ class ExerciseController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$exercise = $this->exercise->findOrFail($id);
+		$exercise = Exercise::findOrFail($id);
 		return Response::json($exercise, 200);
 	}
 
@@ -71,7 +66,7 @@ class ExerciseController extends BaseController {
 
 		if ($validator->passes())
 		{
-			$exercise = $this->exercise->find($id);
+			$exercise = Exercise::find($id);
 			$exercise->update($input);
 
 			return Response::json($exercise, 200);
@@ -88,7 +83,7 @@ class ExerciseController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$exercise = $this->exercise->find($id);
+		$exercise = Exercise::find($id);
 
 		if ($exercise) {
 			$exercise->delete();
