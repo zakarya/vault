@@ -40,6 +40,10 @@ Route::options('/user', function () {
 	return Response::json(Auth::user(), 200);
 });
 
+Route::options('/user/{id}', function ($id) {
+	return Response::make('options', 200);
+});
+
 Route::options('/authentication', function () {
 	return Response::make('authentication', 200);
 });

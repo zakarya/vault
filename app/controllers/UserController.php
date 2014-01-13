@@ -31,8 +31,9 @@ class UserController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$user = User::find($id);
-		Response::json($user, 200);
+		$user = User::where('id', $id)
+				->with('exercises')->first();
+		return Response::json($user, 200);
 	}
 
 	/**
