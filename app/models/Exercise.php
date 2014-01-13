@@ -8,4 +8,9 @@ class Exercise extends Eloquent {
 		'description' => 'required',
 		'level' => 'required',
 	);
+
+	public function users()
+	{
+		return $this->belongsToMany('User');
+	}
 }
