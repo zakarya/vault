@@ -15,7 +15,7 @@ class CreateBaseExercisesTable extends Migration {
 		Schema::create('base_exercises', function(Blueprint $table) {
 			$table->increments('id')->unsigned();
 			$table->integer('exercise_id')->unsigned();
-			// $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
+			$table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

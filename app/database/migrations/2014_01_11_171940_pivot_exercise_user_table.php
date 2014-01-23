@@ -16,8 +16,8 @@ class PivotExerciseUserTable extends Migration {
 			$table->increments('id');
 			$table->integer('exercise_id')->unsigned()->index();
 			$table->integer('user_id')->unsigned()->index();
-			// $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
-			// $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}
