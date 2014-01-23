@@ -26,6 +26,9 @@ class GoalController extends BaseController {
 
 		if ($validator->passes())
 		{
+			$uid = $input['userId'];
+			unset($input['userId']);
+			$input['user_id'] = $uid;
 			$goal = new Goal;
 			$goal->fill($input);
 			$goal->save();

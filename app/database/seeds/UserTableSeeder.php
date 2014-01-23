@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 class UsersTableSeeder extends Seeder {
 
 	public function run()
@@ -10,11 +11,15 @@ class UsersTableSeeder extends Seeder {
 		$users = array(
 			[
 				'email' => 'zack.vera@example.com',
-				'password' => Hash::make('password')
+				'password' => Hash::make('password'),
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now(),
 			],
 			[
 				'email' => 'qphys50@gmail.com',
-				'password' => Hash::make('password')
+				'password' => Hash::make('password'),
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now(),
 			]
 		);
 
