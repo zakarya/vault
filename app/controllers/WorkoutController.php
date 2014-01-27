@@ -28,9 +28,15 @@ class WorkoutController extends BaseController {
 		if($validator->passes()) {
 
 			$input['user_id'] = Auth::user()->id;
+
 			$workout = new Workout;
-			$workout->fill($input);
+			$workout->fill(array(
+					'comment' => $input['comment'],
+					'user_id' => $input['user_id'],
+				)
+			);
 			$workout->save();
+			$workout->setExercises($input['exercises']);
 
 			return Response::json($workout, 200);
 		}

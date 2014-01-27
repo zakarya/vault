@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 class Workout extends Eloquent {
 	protected $guarded = array();
 
@@ -11,7 +12,16 @@ class Workout extends Eloquent {
 		return $this->belongsToMany('Exercise')->withPivot('set', 'reps', 'goal');
 	}
 
-	public function sets() {
-		return $this->hasMany('Set', 'workout_id');
+	public function setExercises($sets) {
+		foreach($sets as $set) {
+			$exercise = Exercise::find($set['id']);
+			$this->exercises()->save($exercise, array(
+					'set' => $set['set'],
+					'reps' => $set['reps'],
+					'goal' => $set['goal'],
+					'created_at' => Carbon::now(),
+					'updated_at' => Carbon::now()
+			));
+		}
 	}
 }
