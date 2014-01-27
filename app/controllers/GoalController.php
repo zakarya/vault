@@ -9,9 +9,10 @@ class GoalController extends BaseController {
 	 */
 	public function index()
 	{
-		$goals = Goal::with('exercise')->get();
+		$goals = Goal::with('exercise')
+					->where('user_id', Auth::user()->id)->get();
 
-		return Response::make($goals->toJson(), 200);
+		return Response::json($goals, 200);
 	}
 
 	/**
@@ -26,14 +27,13 @@ class GoalController extends BaseController {
 
 		if ($validator->passes())
 		{
-			$uid = $input['userId'];
+			$input['user_id'] = $input['userId'];
 			unset($input['userId']);
-			$input['user_id'] = $uid;
 			$goal = new Goal;
 			$goal->fill($input);
 			$goal->save();
 
-			return Response::make($goal->toJson(), 200);
+			return Response::json($goal, 200);
 		}
 
 		return Response::make($validator->messages(), 400);
@@ -47,9 +47,13 @@ class GoalController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$goal = Goal::find($id);
+		$goal = Goal::where('id', $id)
+					->where('user_id', Auth::user()->id)->first();
+		if ($goal && $goal->user_id === Auth::user()->id) {
+				return Response::json($goal, 200);
+		}
 
-		return Response::make($goal->toJson(), 200);
+		return Response::make(null, 204);
 	}
 
 	/**
@@ -66,9 +70,14 @@ class GoalController extends BaseController {
 		if ($validator->passes())
 		{
 			$goal = Goal::find($id);
-			$goal->update($input);
 
-			return Response::make($goal->toJson(), 200);
+			if ($goal->user_id === Auth::user()->id) {
+				$goal->update($input);
+				return Response::json($goal, 200);
+			}
+
+			return Response::make('Trying to access a goal that doesn\'t belong to you', 400);
+
 		}
 
 		return Response::make($validator->messages(), 400);
@@ -84,7 +93,7 @@ class GoalController extends BaseController {
 	{
 		Goal::find($id)->delete();
 
-		return Response::make('', 204);
+		return Response::make(null, 204);
 	}
 
 }
