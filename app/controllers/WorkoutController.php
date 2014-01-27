@@ -9,7 +9,8 @@ class WorkoutController extends BaseController {
 	 */
 	public function index()
 	{
-		$workouts = Workout::all();
+		$workouts = Workout::with('exercises')
+							->where('user_id', Auth::user()->id)->get();
 
 		return Response::json($workouts, 200);
 	}
@@ -25,6 +26,8 @@ class WorkoutController extends BaseController {
 		$validator = Validator::make($input, Workout::$rules);
 
 		if($validator->passes()) {
+
+			$input['user_id'] = Auth::user()->id;
 			$workout = new Workout;
 			$workout->fill($input);
 			$workout->save();
@@ -43,9 +46,15 @@ class WorkoutController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$workout = Workout::find($id);
+		$workout = Workout::where('id', $id)
+						->with('exercises')
+						->where('user_id', Auth::user()->id)->first();
 
-		return Response::json($workout, 200);
+		if ($workout && $workout->user_id === Auth::user()->id) {
+			return Response::json($workout, 200);
+		}
+
+		return Response::make(null, 204);
 	}
 
 	/**
@@ -62,9 +71,18 @@ class WorkoutController extends BaseController {
 		if ($validator->passes())
 		{
 			$workout = Workout::find($id);
-			$workout->update($input);
 
-			return Response::json($workout, 200);
+			if(!$workout) {
+				return Response::make('Not Found', 404);
+			}
+
+			if($workout->user_id === Auth::user()->id) {
+				$workout->update($input);
+				$workout->load('exercises');
+				return Response::json($workout, 200);
+			}
+
+			return Response::make('Trying to access a workout that doesn\'t belong to you', 400);
 		}
 
 		return Response::json($validator->messages(), 400);
@@ -80,7 +98,7 @@ class WorkoutController extends BaseController {
 	{
 		$workout = Workout::find($id);
 
-		if ($workout) {
+		if ($workout->user_id === Auth::user()->id) {
 			$workout->delete();
 		}
 

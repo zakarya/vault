@@ -49,8 +49,9 @@ class GoalController extends BaseController {
 	{
 		$goal = Goal::where('id', $id)
 					->where('user_id', Auth::user()->id)->first();
+
 		if ($goal && $goal->user_id === Auth::user()->id) {
-				return Response::json($goal, 200);
+			return Response::json($goal, 200);
 		}
 
 		return Response::make(null, 204);
@@ -70,6 +71,10 @@ class GoalController extends BaseController {
 		if ($validator->passes())
 		{
 			$goal = Goal::find($id);
+
+			if (!$goal) {
+				return Response::make('Not Found', 404);
+			}
 
 			if ($goal->user_id === Auth::user()->id) {
 				$goal->update($input);
@@ -91,7 +96,11 @@ class GoalController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		Goal::find($id)->delete();
+		$goal = Goal::find($id);
+
+		if($goal->user_id === Auth::user()->id) {
+			$goal->delete();
+		}
 
 		return Response::make(null, 204);
 	}
