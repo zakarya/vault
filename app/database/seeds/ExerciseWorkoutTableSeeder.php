@@ -11,17 +11,11 @@ class ExerciseWorkoutTableSeeder extends Seeder {
 
 		$workouts = Workout::all();
 		foreach ($workouts as $workout) {
-			$workout->exercises()->sync(array(1 => array(
-					'set' => 1,
-					'reps' => 10,
-					'goal' => 10,
+			$workout->exercises()->sync(array($faker->randomNumber(1,60) => array(
 					'created_at' => Carbon::now(),
 					'updated_at' => Carbon::now()
 				),
-				2 => array(
-					'set' => 2,
-					'reps' => 10,
-					'goal' => 10,
+				$faker->randomNumber(1,60) => array(
 					'created_at' => Carbon::now(),
 					'updated_at' => Carbon::now()
 				)));
