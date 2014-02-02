@@ -13,11 +13,12 @@ class CreateSetsTable extends Migration {
 	public function up()
 	{
 		Schema::create('sets', function(Blueprint $table) {
-			$table->increments('id')->unsigned();
+			$table->increments('id');
 			$table->integer('workout_id')->unsigned();
+			$table->integer('exercise_id')->unsigned();
 			$table->integer('reps');
 			$table->integer('goal');
-			$table->integer('actual');
+			$table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
 			$table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
 			$table->timestamps();
 		});
@@ -31,7 +32,7 @@ class CreateSetsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('sets');
+		Schema::drop('sets');
 	}
 
 }
