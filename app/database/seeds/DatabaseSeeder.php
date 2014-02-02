@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('GoalsTableSeeder');
 		$this->call('ExerciseUserTableSeeder');
 		$this->call('ExerciseWorkoutTableSeeder');
+		$this->call('SetsTableSeeder');
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
