@@ -18,7 +18,7 @@ class PivotExerciseWorkoutTable extends Migration {
 			$table->integer('workout_id')->unsigned();
 			$table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
 			$table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
-			$table->timestamps();
+			// $table->timestamps();
 		});
 	}
 

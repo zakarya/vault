@@ -10,17 +10,34 @@ class ExerciseWorkoutTableSeeder extends Seeder {
 		$faker = Faker\Factory::create();
 
 		$workouts = Workout::all();
-		foreach ($workouts as $workout) {
-			$workout->exercises()->sync(array($faker->randomNumber(1,60) => array(
-					'created_at' => Carbon::now(),
-					'updated_at' => Carbon::now()
-				),
-				$faker->randomNumber(1,60) => array(
-					'created_at' => Carbon::now(),
-					'updated_at' => Carbon::now()
-				)));
+		$users = User::all();
+		$baseExercises = Exercise::where('is_parent', 1)->get();
+		foreach($users as $user) {
+			$bases = $baseExercises;
+			$count = 0;
+			$level = 1;
+			foreach ($workouts as $workout) {
+
+				for($i = 0; $i < 2; $i++) {
+					$base = $bases->pop();
+					if ($base) {
+						$exercise = Exercise::where('parent_id', $base->id)
+										->where('level', $level)->first();
+					} else {
+						$count++;
+						$bases = Exercise::where('is_parent', 1)->get();
+					}
+
+					if ($exercise) {
+						$workout->exercises()->save($exercise);
+					}
+					if($count % 3 === 0) {
+						$level++;
+					}
+				}
+			}
 		}
+	}
 
 		// DB::table('exercise_workout')->insert();
-	}
 }

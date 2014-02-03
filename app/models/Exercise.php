@@ -13,4 +13,15 @@ class Exercise extends Eloquent {
 	{
 		return $this->belongsToMany('User');
 	}
+
+	public function sets() {
+		return $this->hasMany('Set');
+	}
+
+	public function loadSets($workoutId)
+	{
+		return $this->load(array('sets' => function ($query) use ($workoutId) {
+				$query->where('workout_id', $workoutId);
+		}));
+	}
 }
