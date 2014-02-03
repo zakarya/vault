@@ -5,23 +5,32 @@ class Workout extends Eloquent {
 	protected $guarded = array();
 
 	public static $rules = array(
-			'comment' => 'required'
 		);
 
-	public function exercises() {
-		return $this->belongsToMany('Exercise')->withPivot('set', 'reps', 'goal');
+	public function user()
+	{
+		return $this->belongsTo('User');
 	}
 
-	public function setExercises($sets) {
-		foreach($sets as $set) {
-			$exercise = Exercise::find($set['id']);
-			$this->exercises()->save($exercise, array(
-					'set' => $set['set'],
-					'reps' => $set['reps'],
-					'goal' => $set['goal'],
-					'created_at' => Carbon::now(),
-					'updated_at' => Carbon::now()
-			));
+	public function exercises() {
+		return $this->belongsToMany('Exercise');
+	}
+
+	public function sets() {
+		return $this->hasMany('Set');
+	}
+
+	public function createExercises($exercises, $workoutId) {
+		foreach($exercises as $exercise) {
+			$ex = Exercise::find($exercise['id']);
+			$this->exercises()->save($ex);
+			foreach($exercise['sets'] as $set) {
+				$s = new Set($set);
+				$s->exercise_id = $ex->id;
+				$s->workout_id = $workoutId;
+				$ex->sets()->save($s);
+			}
 		}
 	}
+
 }

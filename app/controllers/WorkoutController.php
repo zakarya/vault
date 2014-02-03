@@ -12,6 +12,12 @@ class WorkoutController extends BaseController {
 		$workouts = Workout::with('exercises')
 							->where('user_id', Auth::user()->id)->get();
 
+		foreach($workouts as $workout) {
+			foreach($workout->exercises as $exercise) {
+				$exercise->loadSets($workout->id);
+			}
+		}
+
 		return Response::json($workouts, 200);
 	}
 
@@ -33,10 +39,11 @@ class WorkoutController extends BaseController {
 			$workout->fill(array(
 					'comment' => $input['comment'],
 					'user_id' => $input['user_id'],
+					'date' => $input['date'],
 				)
 			);
 			$workout->save();
-			$workout->setExercises($input['exercises']);
+			$workout->createExercises($input['exercises'], $workout->id);
 
 			return Response::json($workout, 200);
 		}
@@ -55,6 +62,10 @@ class WorkoutController extends BaseController {
 		$workout = Workout::where('id', $id)
 						->with('exercises')
 						->where('user_id', Auth::user()->id)->first();
+
+		foreach($workout->exercises as $exercise) {
+			$exercise->loadSets($id);
+		}
 
 		if ($workout && $workout->user_id === Auth::user()->id) {
 			return Response::json($workout, 200);
