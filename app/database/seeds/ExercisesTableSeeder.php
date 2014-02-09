@@ -11,7 +11,7 @@ class ExercisesTableSeeder extends Seeder {
 	$exercises= [
 		[
 			"name" => "Full Pushups",
-			"parent_id" => null,
+			"parent_id" => 1,
 			"parent_name" => "PUSHUPS",
 			"is_parent" => 1,
 			"description" => "From the kneeling position, place your palms on the floor and stretch your legs out behind you. Keep your thighs and feet together, and ensure that the hands are below your upper chest and shoulder width apart. Straighten the arms. The hips and spine should be in line. This is the start position (fig 9). Bend at the elbows and shoulders until your breastbone comes to within a fist’s width from the floor. In prison pushup competitions, a “counter” clenches his fist pinky side down on the floor, and counts out when the athlete’s chest touches the knuckle of his thumb. If you’re training alone and you wish to keep to the right depth, place a baseball or tennis ball directly below your chest (fig. 10). As your chest kisses the ball, pause and push up.",
@@ -22,7 +22,7 @@ class ExercisesTableSeeder extends Seeder {
 		],
 		[
 			"name" => "Full Squats",
-			"parent_id" => null,
+			"parent_id" => 2,
 			"parent_name" => "SQUAT",
 			"is_parent" => 1,
 			"description" => "Stand tall, with the feet shoulder width apart or a little wider, depending upon your preference. Turn the toes slightly out, and place the arms in a comfortable position. This is the start of the movement (fig. 29). Bend at the hips and knees, keeping the back straight. When your thighs reach approximately parallel to the floor, shift your weight backwards as if you were about to sit down. Continue descending at a controlled speed until the backs of your thighs are resting against your calves. This is the finish position (fig. 30). Pause for a moment before pressing yourself back up with leg strength alone. Your upward motion should be the reverse of your downward motion. Don’t raise the heels, or allow the knees to track inwards.",
@@ -33,7 +33,7 @@ class ExercisesTableSeeder extends Seeder {
 		],
 		[
 			"name" => "Full Pullups",
-			"parent_id" => null,
+			"parent_id" => 3,
 			"parent_name" => "PULLUPS",
 			"is_parent" => 1,
 			"description" => "Grab hold of a horizontal bar with a shoulder width overhand grip. A slightly wider grip is acceptable—experiment to find out which width feels strongest for you. Bend at the knee and loop the ankles behind your body. Your feet should be clear of the ground. Tense the body, keep the shoulders down tight and retain a very slight (almost unnoticeable) bend in the elbows to take the stress off the arm joints and place it on the muscles instead. This is the start position (fig. 49). Bend at the elbows and shoulders until your chin passes over the bar. This is the finish position (fig. 50). Enjoy the view! Pause for a moment, before reversing the motion under full control. Don’t be explosive—this means depending on momentum during the exercise. The perfect muscle-building technique is smooth. Try to take two seconds up and two seconds down, pausing for a second at the top and bottom.",
@@ -44,7 +44,7 @@ class ExercisesTableSeeder extends Seeder {
 		],
 		[
 			"name" => "Hanging Straight Leg Raises",
-			"parent_id" => null,
+			"parent_id" => 4,
 			"parent_name" => "LEG RAISE",
 			"is_parent" => 1,
 			"description" => "You know the drill by now! Take hold of an overhead bar which is high enough to leave your feet a short distance from the floor when your body is extended. Your hands should be approximately shoulder width apart. Ensure that the shoulders are tight. This is the start position (fig. 81). Smoothly—over the course of at least two seconds—raise your legs until they are parallel with the floor. Exhale as your legs rise, blowing all the air you can out of your lungs so that the abdomen is fully contracted. This is the finish position (fig. 82). Pause, before reversing the motion perfectly for at least another two seconds until you are back in the start position. Inhale as you go. Remain “flexed,” even in the start position. Your legs must stay locked at all times and you must use pure muscular control; no momentum allowed.",
@@ -55,7 +55,7 @@ class ExercisesTableSeeder extends Seeder {
 		],
 		[
 			"name" => "Full Bridges",
-			"parent_id" => null,
+			"parent_id" => 5,
 			"parent_name" => "BRIDGE",
 			"is_parent" => 1,
 			"description" => "Lie on your back. Draw your feet in, bending the knees until your heels are approximately six to eight inches from your glutes. The feet should be shoulder width apart or slightly closer. Place the hands alongside the head, with the palms flat on the floor and your fingers pointing towards your toes. Your elbows should be angled towards the ceiling at this point. This is the start position (fig. 93). Now push the hips as high as you can, lifting the body from the floor. Continue pushing through your arms and legs until your back is well arched, and your hips are high. In the perfect bridge, your arms will be totally straight. Allow the head to tilt backwards between the arms, so that you can look at the wall behind you. This is the finish position (fig. 94). Hold this top position for a moment, before reversing your motion. Control your descent—you will gain more benefit from the exercise if you lower yourself smoothly than if you simply collapse. Continue going all the way back down until your hips, back and head are resting completely on the floor again. This sequence constitutes one rep. Push yourself back up again for your target reps, breathing normally throughout.",
@@ -66,7 +66,7 @@ class ExercisesTableSeeder extends Seeder {
 		],
 		[
 			"name" => "Handstand Pushups",
-			"parent_id" => null,
+			"parent_id" => 6,
 			"parent_name" => "HANDSTAND PUSHUP",
 			"is_parent" => 1,
 			"description" => "Approach a solid wall and place your palms flat on the ground approximately shoulder width apart and about six to ten inches from the wall. Bend at the knees and kick up against the wall into a handstand position. If you have worked through the steps so far you will now be pretty expert at this. If you have developed your own technique, that’s fine; calisthenics isn’t gymnastics—it’s the muscle-building portion of the exercise that’s of importance, not how you get there. Once you have found the wall, keep contact with it through your heels, maintaining a slight backwards arch in your body. Your arms should be straight. This is the start position (fig. 115). Bend at the shoulders and elbows until the top of your head gently makes contact with the floor. This is the finish position (fig. 116). Use “kiss-the-baby” pressure to protect your head (see pages 43—44). Pause briefly for a second, before pushing yourself back up to the start position. Apply muscular control and concentration in all inverse movements to ensure safety. Breathe as smoothly and evenly as possible.",

@@ -48,6 +48,10 @@ Route::options('/authentication', function () {
 	return Response::make('authentication', 200);
 });
 
+Route::options('/progress', function () {
+	return Response::make('options', 200);
+});
+
 Route::resource('authentication', 'AuthenticationController');
 
 Route::group(array('before' => 'auth.token'), function () {
@@ -55,4 +59,5 @@ Route::group(array('before' => 'auth.token'), function () {
 	Route::resource('workout', 'WorkoutController');
 	Route::resource('goal', 'GoalController');
 	Route::resource('user', 'UserController');
+	Route::get('progress', 'ProgressController@index');
 });
