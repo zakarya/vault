@@ -12,7 +12,7 @@ class WorkoutsTableSeeder extends Seeder {
 		$users = User::all();
 		foreach($users as $user) {
 			$first = Carbon::now()->subMonths(3);
-			for ($i = 0; $i < 30; $i++) {
+			for ($i = 0; $i < 19; $i++) {
 				$workout = Workout::create(
 					array(
 						"user_id" => $user->id,

@@ -10,7 +10,9 @@ class WorkoutController extends BaseController {
 	public function index()
 	{
 		$workouts = Workout::with('exercises')
-							->where('user_id', Auth::user()->id)->get();
+							->where('user_id', Auth::user()->id)
+							->orderBy('id', 'desc')
+							->get();
 
 		foreach($workouts as $workout) {
 			foreach($workout->exercises as $exercise) {
@@ -44,6 +46,10 @@ class WorkoutController extends BaseController {
 			);
 			$workout->save();
 			$workout->createExercises($input['exercises'], $workout->id);
+			$workout->load('exercises');
+			foreach($workout->exercises as $exercise) {
+				$exercise->loadSets($workout->id);
+			}
 
 			return Response::json($workout, 200);
 		}
